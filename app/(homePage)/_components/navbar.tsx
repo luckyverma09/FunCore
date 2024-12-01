@@ -55,7 +55,7 @@ const Navbar = () => {
               asChild
               className='hover:text-white hover:bg-blue-600 transition-all duration-300 rounded-full'
             >
-              <Link href='/games'>Play</Link>
+              <Link href='/documents'>Play</Link>
             </Button>
             <UserButton afterSignOutUrl='/' />
           </>
