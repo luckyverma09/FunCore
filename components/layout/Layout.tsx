@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Header from './Header';
 import Footer from './Footer';
@@ -9,9 +9,15 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
     <>
-      <div className={`${styles.gradientBackground}`}>
+      <div className={`${styles.gradientBackground} ${mounted ? 'client-rendered' : ''}`}>
         <Head>
           <title>Gaming Platform</title>
           <meta name='description' content='A next-generation gaming platform' />

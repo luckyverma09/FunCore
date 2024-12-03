@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
+import { useSession } from 'next-auth/react';
+import ScoreBoard from '../../components/ScoreBoard';
 
 // Dynamically import game components with SSR disabled
 const SudokuGame = dynamic(() => import('../../games/sudoku/SudokuGame'), { ssr: false });
@@ -8,28 +10,37 @@ const FlappyBirdGame = dynamic(() => import('../../games/flappyBird/FlappyBirdGa
   ssr: false,
 });
 const Game2048 = dynamic(() => import('../../games/2048/2048Game'), { ssr: false });
+const StickHero = dynamic(() => import('../../games/stickHero/StickHeroGame'), { ssr: false });
 
 const GamePage = () => {
   const router = useRouter();
   const { slug } = router.query;
-  const [isLoading, setIsLoading] = useState(true);
+  const [isClient, setIsClient] = useState(false);
+  const { data: session, status } = useSession();
 
   useEffect(() => {
-    if (slug) {
-      setIsLoading(false);
-    }
-  }, [slug]);
+    setIsClient(true);
+  }, []);
 
-  if (isLoading) {
+  if (status === 'loading') {
     return <div>Loading...</div>;
   }
 
+  if (!session) {
+    router.push('/login');
+    return null;
+  }
+
   const renderGame = () => {
+    if (!isClient) return null;
+
     switch (slug) {
       case 'sudoku':
         return <SudokuGame />;
       case 'flappy-bird':
         return <FlappyBirdGame />;
+      case 'stick-hero':
+        return <StickHero />;
       case '2048':
         return <Game2048 />;
       default:
@@ -38,9 +49,14 @@ const GamePage = () => {
   };
 
   return (
-    <div className='container mx-auto px-4 py-8'>
-      <h1 className='text-3xl font-bold mb-6'>{slug ? `Playing ${slug}` : 'Loading...'}</h1>
-      {renderGame()}
+    <div className='flex'>
+      <div className='flex-1 container mx-auto px-4 py-8'>
+        <h1 className='text-3xl font-bold mb-6'>
+          {isClient && slug ? `Playing ${slug}` : 'Loading...'}
+        </h1>
+        {renderGame()}
+      </div>
+      <ScoreBoard gameId={slug as string} />
     </div>
   );
 };

@@ -1,9 +1,8 @@
-import NextAuth, { DefaultSession } from 'next-auth';
+import NextAuth, { DefaultSession, NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { verifyPassword } from '../../../lib/auth';
 import { connectToDatabase } from '../../../lib/mongodb';
 
-// Extend the built-in session type
 declare module 'next-auth' {
   interface Session {
     user: {
@@ -12,7 +11,8 @@ declare module 'next-auth' {
   }
 }
 
-export default NextAuth({
+export const authOptions: NextAuthOptions = {
+  secret: process.env.NEXTAUTH_SECRET,
   providers: [
     CredentialsProvider({
       name: 'Credentials',
@@ -39,12 +39,21 @@ export default NextAuth({
           throw new Error('Invalid password');
         }
 
-        return { id: user._id.toString(), email: user.email, name: user.username };
+        return {
+          id: user._id.toString(),
+          email: user.email,
+          name: user.username,
+        };
       },
     }),
   ],
+  pages: {
+    signIn: '/login',
+    error: '/login',
+  },
   session: {
     strategy: 'jwt',
+    maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   callbacks: {
     async jwt({ token, user }) {
@@ -60,4 +69,6 @@ export default NextAuth({
       return session;
     },
   },
-});
+};
+
+export default NextAuth(authOptions);

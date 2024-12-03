@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
-    <SessionProvider session={session}>
+    <SessionProvider session={session} refetchInterval={0}>
       <Layout>
         <Component {...pageProps} />
         <ToastContainer />
