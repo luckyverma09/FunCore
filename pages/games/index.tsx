@@ -3,6 +3,7 @@ import Link from 'next/link';
 const games = [
   { id: 'flappy-bird', title: 'Flappy Bird' },
   { id: 'stick-hero', title: 'Stick Hero' },
+  { id: 'snake', title: 'Snake' },
   { id: 'hang-man', title: 'Hang Man' },
 ];
 

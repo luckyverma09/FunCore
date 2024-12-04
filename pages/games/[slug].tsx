@@ -5,6 +5,7 @@ import { useSession } from 'next-auth/react';
 import ScoreBoard from '../../components/ScoreBoard';
 import { HangManGame } from '@/games/hangMan/HangManGame';
 import StickHeroGame from '@/games/stickHero/StickHeroGame';
+import SnakeGame from '@/games/snake/SnakeGame';
 
 // Dynamically import game components with SSR disabled
 const FlappyBirdGame = dynamic(() => import('../../games/flappyBird/FlappyBirdGame'), {
@@ -44,6 +45,8 @@ const GamePage = () => {
         return <StickHeroGame />;
       case 'hang-man':
         return <HangManGame />;
+      case 'snake':
+        return <SnakeGame />;
       default:
         return <div>Game not found</div>;
     }

@@ -1,0 +1,112 @@
+#instruction-text,
+.scores h1 {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+.snake-game {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to right, #4facfe 0, #00f2fe 100%);
+  padding: 20px;
+  transition: filter 0.3s;
+}
+.snake-game.blurred {
+  filter: blur(5px);
+}
+.scores {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+.scores h1 {
+  color: #fff;
+  font-size: 3rem;
+}
+.game-border-1 {
+  border: 10px solid #333;
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
+  overflow: hidden;
+}
+.game-border-2 {
+  border: 8px solid #555;
+  border-radius: 12px;
+}
+.game-border-3 {
+  border: 6px solid #777;
+  border-radius: 6px;
+}
+#game-board {
+  width: 500px;
+  height: 500px;
+  display: grid;
+  grid-template: repeat(20, 1fr) / repeat(20, 1fr);
+  background-color: #1a1a1a;
+  position: relative;
+}
+#instruction-text,
+.game-over {
+  position: absolute;
+  top: 60%;
+  left: 43%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #fff;
+}
+.snake:first-child {
+  background-color: #3498db;
+  border-radius: 8px;
+}
+.snake {
+  background-color: #3f3;
+  border: 1px solid #1a1a1a;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+.snake:hover {
+  background-color: #28a745;
+}
+.food {
+  background-color: #f33;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(255, 51, 51, 0.5);
+}
+#instruction-text {
+  text-transform: uppercase;
+  font-size: 2rem;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+.game-over {
+  background-color: rgba(0, 0, 0, 0.9);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
+  width: 400px;
+  max-width: 90%;
+  z-index: 10;
+}
+.game-over h2 {
+  margin: 0 0 15px;
+  font-size: 2.5rem;
+}
+.game-over button {
+  padding: 12px 24px;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.game-over button:hover {
+  background-color: #2980b9;
+}
