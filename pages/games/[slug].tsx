@@ -7,11 +7,9 @@ import { HangManGame } from '@/games/hangMan/HangManGame';
 import StickHeroGame from '@/games/stickHero/StickHeroGame';
 
 // Dynamically import game components with SSR disabled
-const SudokuGame = dynamic(() => import('../../games/sudoku/SudokuGame'), { ssr: false });
 const FlappyBirdGame = dynamic(() => import('../../games/flappyBird/FlappyBirdGame'), {
   ssr: false,
 });
-const Game2048 = dynamic(() => import('../../games/2048/2048Game'), { ssr: false });
 const Hangman = dynamic<{}>(
   () => import('../../games/hangMan/HangManGame').then((mod) => mod.HangManGame),
   { ssr: false }
@@ -40,16 +38,12 @@ const GamePage = () => {
     if (!isClient) return null;
 
     switch (slug) {
-      case 'sudoku':
-        return <SudokuGame />;
       case 'flappy-bird':
         return <FlappyBirdGame />;
       case 'stick-hero':
         return <StickHeroGame />;
       case 'hang-man':
         return <HangManGame />;
-      case '2048':
-        return <Game2048 />;
       default:
         return <div>Game not found</div>;
     }
