@@ -33,7 +33,7 @@ const ScoreBoard = ({ gameId }: { gameId: string }) => {
   }, [gameId]);
 
   return (
-    <div className='w-64 bg-white/90 backdrop-blur-sm p-6 rounded-xl shadow-xl'>
+    <div className='w-64 h-1/2 bg-white/90 backdrop-blur-sm p-6 rounded-xl shadow-xl'>
       <h2 className='text-2xl font-bold mb-6 text-gray-800 text-center'>High Scores</h2>
       {loading ? (
         <div className='text-center text-gray-500'>Loading scores...</div>

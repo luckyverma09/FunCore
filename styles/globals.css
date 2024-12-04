@@ -27,3 +27,35 @@ h6 {
 .btn-secondary {
   @apply bg-gray-200 text-gray-800 hover:bg-gray-300;
 }
+
+.start-button {
+  @apply px-8 py-3 bg-white text-blue-500 rounded-lg hover:bg-blue-100 transition-colors font-bold text-xl mb-4;
+}
+
+.game-container {
+  @apply relative;
+}
+
+.game-canvas {
+  @apply border-4 border-white rounded-lg shadow-lg;
+}
+
+.score-display {
+  @apply absolute top-4 left-4 text-white text-2xl font-bold;
+}
+
+.game-over-overlay {
+  @apply absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50 rounded-lg;
+}
+
+.game-over-message {
+  @apply text-white text-4xl font-bold mb-4;
+}
+
+.final-score {
+  @apply text-white text-2xl mb-4;
+}
+
+.restart-button {
+  @apply px-6 py-2 bg-white text-blue-500 rounded-lg hover:bg-blue-100 transition-colors font-bold;
+}
