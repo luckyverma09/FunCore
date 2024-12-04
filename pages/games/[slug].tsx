@@ -3,6 +3,8 @@ import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 import { useSession } from 'next-auth/react';
 import ScoreBoard from '../../components/ScoreBoard';
+import { HangManGame } from '@/games/hangMan/HangManGame';
+import StickHeroGame from '@/games/stickHero/StickHeroGame';
 
 // Dynamically import game components with SSR disabled
 const SudokuGame = dynamic(() => import('../../games/sudoku/SudokuGame'), { ssr: false });
@@ -10,7 +12,10 @@ const FlappyBirdGame = dynamic(() => import('../../games/flappyBird/FlappyBirdGa
   ssr: false,
 });
 const Game2048 = dynamic(() => import('../../games/2048/2048Game'), { ssr: false });
-const StickHero = dynamic(() => import('../../games/stickHero/StickHeroGame'), { ssr: false });
+const Hangman = dynamic<{}>(
+  () => import('../../games/hangMan/HangManGame').then((mod) => mod.HangManGame),
+  { ssr: false }
+);
 
 const GamePage = () => {
   const router = useRouter();
@@ -40,7 +45,9 @@ const GamePage = () => {
       case 'flappy-bird':
         return <FlappyBirdGame />;
       case 'stick-hero':
-        return <StickHero />;
+        return <StickHeroGame />;
+      case 'hang-man':
+        return <HangManGame />;
       case '2048':
         return <Game2048 />;
       default:

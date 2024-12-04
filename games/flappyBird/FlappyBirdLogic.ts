@@ -37,7 +37,7 @@ export class FlappyBirdLogic {
         headers: {
           'Content-Type': 'application/json',
         },
-        credentials: 'include', // Important for sending auth cookies
+        credentials: 'include',
         body: JSON.stringify({ score: this.score }),
       });
 
