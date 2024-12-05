@@ -34,19 +34,20 @@ const games = [
 const GamesPage = () => {
   return (
     <div className='container mx-auto px-4 py-8'>
-      <h1 className='text-3xl font-bold mb-6 text-center'>Available Games</h1>
-      <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
+      <h1 className='text-3xl font-bold mb-6 text-center text-lime-500'>Available Games</h1>
+      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6'>
         {games.map((game) => (
           <Link key={game.id} href={`/games/${game.id}`}>
-            <div className='block bg-white rounded-lg shadow-md overflow-hidden cursor-pointer hover:shadow-lg'>
-              <Image
-                src={game.thumbnail}
-                alt={game.title}
-                width={300}
-                height={200}
-                layout='responsive'
-                className='object-cover'
-              />
+            <div className='block bg-white rounded-lg shadow-md overflow-hidden cursor-pointer transform transition duration-300 hover:scale-105 hover:shadow-xl'>
+              <div className='relative w-full h-40'>
+                <Image
+                  src={game.thumbnail}
+                  alt={game.title}
+                  layout='fill'
+                  objectFit='cover'
+                  className='rounded-t-lg'
+                />
+              </div>
               <div className='p-4'>
                 <h2 className='text-xl font-semibold text-center'>{game.title}</h2>
               </div>
