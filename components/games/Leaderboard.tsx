@@ -40,21 +40,21 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ entries: initialEntries }) =>
   }
 
   return (
-    <div className='bg-white shadow overflow-hidden sm:rounded-lg max-w-2xl mx-auto mt-8'>
-      <div className='px-4 py-5 sm:px-6'>
-        <h3 className='text-2xl leading-6 font-bold text-gray-900'>Global Leaderboard</h3>
-        <p className='mt-1 text-sm text-gray-500'>Total scores across all games</p>
+    <div className='bg-gradient-to-r from-lime-400 to-green-400 shadow-lg overflow-hidden sm:rounded-lg max-w-2xl mx-auto mt-8 '>
+      <div className='px-6 py-5'>
+        <h3 className='text-3xl leading-6 font-bold text-white'>Global Leaderboard</h3>
+        <p className='mt-1 text-sm  text-black-200'>Total scores across all games</p>
       </div>
-      <div className='border-t border-gray-200'>
+      <div className='bg-white rounded-t-lg shadow-inner'>
         <ul className='divide-y divide-gray-200'>
           {entries.map((entry, index) => (
-            <li key={entry.id} className='px-4 py-4 sm:px-6 hover:bg-gray-50'>
+            <li key={entry.id} className='px-6 py-4 hover:bg-gray-100'>
               <div className='flex items-center justify-between'>
                 <div className='flex items-center'>
                   <span
                     className={`font-medium mr-4 text-lg ${
                       index === 0
-                        ? 'text-yellow-500'
+                        ? 'text-yellow-400'
                         : index === 1
                         ? 'text-gray-400'
                         : index === 2
@@ -64,9 +64,9 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ entries: initialEntries }) =>
                   >
                     #{index + 1}
                   </span>
-                  <p className='text-lg font-medium text-gray-900'>{entry.username}</p>
+                  <p className='text-lg font-medium text-gray-800'>{entry.username}</p>
                 </div>
-                <p className='text-lg font-semibold text-indigo-600'>
+                <p className='text-lg font-semibold text-purple-600'>
                   {entry.score.toLocaleString()} pts
                 </p>
               </div>
@@ -76,6 +76,7 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ entries: initialEntries }) =>
       </div>
     </div>
   );
+  
 };
 
 export default Leaderboard;
