@@ -1,4 +1,6 @@
 import { GetServerSideProps } from 'next';
+import { connectToDatabase } from '../lib/mongodb';
+import { ObjectId } from 'mongodb';
 import Leaderboard from '../components/games/Leaderboard';
 
 interface LeaderboardPageProps {
@@ -15,18 +17,59 @@ const LeaderboardPage = ({ entries }: LeaderboardPageProps) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  // Fetch leaderboard data from your API or database
-  const entries = [
-    { id: '1', username: 'Player1', score: 1000 },
-    { id: '2', username: 'Player2', score: 900 },
-    { id: '3', username: 'Player3', score: 800 },
-  ];
+  try {
+    const client = await connectToDatabase();
+    const db = client.db();
 
-  return {
-    props: {
-      entries,
-    },
-  };
+    const leaderboard = await db
+      .collection('scores')
+      .aggregate([
+        {
+          $group: {
+            _id: { $toObjectId: '$userId' },
+            totalScore: { $sum: '$score' },
+          },
+        },
+        {
+          $lookup: {
+            from: 'users',
+            localField: '_id',
+            foreignField: '_id',
+            as: 'userDetails',
+          },
+        },
+        {
+          $unwind: '$userDetails',
+        },
+        {
+          $project: {
+            id: { $toString: '$_id' },
+            username: '$userDetails.username',
+            score: '$totalScore',
+          },
+        },
+        {
+          $sort: { score: -1 },
+        },
+        {
+          $limit: 10,
+        },
+      ])
+      .toArray();
+
+    return {
+      props: {
+        entries: JSON.parse(JSON.stringify(leaderboard)),
+      },
+    };
+  } catch (error) {
+    console.error('Error fetching leaderboard:', error);
+    return {
+      props: {
+        entries: [],
+      },
+    };
+  }
 };
 
 export default LeaderboardPage;

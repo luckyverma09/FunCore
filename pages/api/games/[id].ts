@@ -40,7 +40,6 @@ export default async function handler(
       title: game.title,
       description: game.description,
       category: game.category,
-      // Include other game properties as needed
     });
   } catch (error) {
     console.error('Error fetching game:', error);

@@ -4,6 +4,7 @@ const games = [
   { id: 'flappy-bird', title: 'Flappy Bird' },
   { id: 'stick-hero', title: 'Stick Hero' },
   { id: 'snake', title: 'Snake' },
+  { id: 'breakout', title: 'Breakout' },
   { id: 'hang-man', title: 'Hang Man' },
 ];
 

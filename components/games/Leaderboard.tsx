@@ -1,3 +1,4 @@
+//components/games/Leaderboard.tsx
 import { useEffect, useState } from 'react';
 
 interface LeaderboardEntry {
@@ -6,13 +7,18 @@ interface LeaderboardEntry {
   score: number;
 }
 
-const Leaderboard: React.FC = () => {
-  const [entries, setEntries] = useState<LeaderboardEntry[]>([]);
-  const [loading, setLoading] = useState(true);
+interface LeaderboardProps {
+  entries: LeaderboardEntry[];
+}
+
+const Leaderboard: React.FC<LeaderboardProps> = ({ entries: initialEntries }) => {
+  const [entries, setEntries] = useState<LeaderboardEntry[]>(initialEntries);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchLeaderboard = async () => {
       try {
+        setLoading(true);
         const response = await fetch('/api/leaderboard');
         if (response.ok) {
           const data = await response.json();
@@ -25,8 +31,7 @@ const Leaderboard: React.FC = () => {
       }
     };
 
-    fetchLeaderboard();
-    const interval = setInterval(fetchLeaderboard, 30000); // Refresh every 30 seconds
+    const interval = setInterval(fetchLeaderboard, 30000);
     return () => clearInterval(interval);
   }, []);
 

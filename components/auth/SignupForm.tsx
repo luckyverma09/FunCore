@@ -37,7 +37,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
   return (
     <form onSubmit={handleSubmit} className='space-y-4'>
       <div>
-        <label htmlFor='username' className='block text-sm font-medium text-gray-700'>
+        <label htmlFor='username' className='block text-sm font-medium text-lime-300'>
           Username
         </label>
         <input
@@ -45,11 +45,11 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
           id='username'
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
+          className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-lime -300 focus:ring focus:ring-lime -200 focus:ring-opacity-50 p-2'
         />
       </div>
       <div>
-        <label htmlFor='email' className='block text-sm font-medium text-gray-700'>
+        <label htmlFor='email' className='block text-sm font-medium text-lime-300'>
           Email
         </label>
         <input
@@ -57,11 +57,11 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
           id='email'
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
+          className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-lime -300 focus:ring focus:ring-lime -200 focus:ring-opacity-50 p-2'
         />
       </div>
       <div>
-        <label htmlFor='password' className='block text-sm font-medium text-gray-700'>
+        <label htmlFor='password' className='block text-sm font-medium text-lime-300'>
           Password
         </label>
         <input
@@ -69,18 +69,20 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSubmit }) => {
           id='password'
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
+          className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-lime -300 focus:ring focus:ring-lime -200 focus:ring-opacity-50 p-2'
         />
       </div>
       {error && <p className='text-red-500'>{error}</p>}
       <button
         type='submit'
-        className='w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+        className='w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-black bg-lime-500 hover:bg-lime-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime-400'
       >
-        Sign up
+        Sign Up
       </button>
     </form>
   );
+
+  /// signup form
 };
 
 export default SignupForm;

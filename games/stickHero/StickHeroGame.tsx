@@ -93,13 +93,12 @@ const StickHeroGame: React.FC = () => {
   if (!session) return null;
 
   return (
-    <div className='fixed inset-0 w-screen h-screen'>
+    <div className='flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-cyan-400 to-blue-500'>
+      <h1 className='text-4xl font-bold text-white mb-8'>Stick Hero</h1>
+
       {!gameStarted ? (
-        <div className='absolute inset-0 flex items-center justify-center bg-gradient-to-r from-cyan-400 to-blue-500'>
-          <button
-            onClick={handleStart}
-            className='px-8 py-3 bg-white text-blue-500 rounded-lg hover:bg-blue-100 transition-colors font-bold text-xl'
-          >
+        <div className='flex flex-col items-center'>
+          <button onClick={handleStart} className='start-button'>
             Start Game
           </button>
         </div>

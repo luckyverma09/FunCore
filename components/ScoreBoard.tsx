@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 interface Score {
-  userId: string;
+  username: string;
   score: number;
   createdAt: string;
 }
@@ -53,7 +53,9 @@ const ScoreBoard = ({ gameId }: { gameId: string }) => {
                     : 'bg-white'
                 }`}
               >
-                <span className='font-semibold text-gray-700'>#{index + 1}</span>
+                <span className='font-semibold text-gray-700'>
+                  #{index + 1} - {score.username}
+                </span>
                 <span className='font-bold text-gray-900'>{score.score}</span>
               </div>
             ))

@@ -1,18 +1,25 @@
 @keyframes gradientAnimation {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
+  0% {
+    background-position: 0% 50%;
   }
-  
-  .gradientBackground {
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-    background-size: 400% 400%;
-    animation: gradientAnimation 15s ease infinite;
-    min-height: 100vh;
+  50% {
+    background-position: 100% 50%;
   }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* .gradientBackground {
+  background: linear-gradient(-45deg, #ff9a8b, #ff6a88, #ff99ac, #9d5aac);
+  background-size: 400% 400%;
+  animation: gradientAnimation 10s ease infinite;
+  min-height: 100vh;
+} */
+
+.gradientBackground {
+  background: linear-gradient(-45deg, #b29c9763, #534e50, #000000, #8a918f);
+  background-size: 400% 400%;
+  animation: gradientAnimation 15s ease infinite;
+  min-height: 100vh;
+}

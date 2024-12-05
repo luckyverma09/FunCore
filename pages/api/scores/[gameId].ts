@@ -1,18 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { getSession } from 'next-auth/react';
 import { connectToDatabase } from '../../../lib/mongodb';
 
-import { getServerSession } from 'next-auth/next';
-import { authOptions } from '../auth/[...nextauth]';
-
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const session = await getServerSession(req, res, authOptions);
-
-  if (!session) {
-    return res.status(401).json({ message: 'You must be signed in to save scores.' });
-  }
-
   const { gameId } = req.query;
+
   const client = await connectToDatabase();
   const db = client.db();
 
@@ -20,7 +11,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     try {
       const { score } = req.body;
       await db.collection('scores').insertOne({
-        userId: session.user.id,
+        userId: req.body.userId,
         gameId,
         score,
         createdAt: new Date(),
@@ -36,13 +27,45 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     try {
       const scores = await db
         .collection('scores')
-        .find({ gameId })
-        .sort({ score: -1 })
-        .limit(10)
+        .aggregate([
+          {
+            $match: { gameId },
+          },
+          {
+            $sort: { score: -1 },
+          },
+
+          {
+            $limit: 10,
+          },
+
+          {
+            $lookup: {
+              from: 'users',
+              localField: 'userId',
+              foreignField: '_id',
+              as: 'userDetails',
+            },
+          },
+          {
+            $unwind: '$userDetails',
+          },
+          {
+            $project: {
+              score: 1,
+              createdAt: 1,
+              username: '$userDetails.username',
+            },
+          },
+        ])
         .toArray();
+
       return res.status(200).json(scores);
     } catch (error) {
+      console.error('Error fetching scores:', error);
       return res.status(500).json({ message: 'Error fetching scores' });
     }
   }
+
+  return res.status(405).json({ message: 'Method not allowed' });
 }

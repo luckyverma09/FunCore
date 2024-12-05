@@ -40,16 +40,23 @@ const SignupPage = () => {
   };
 
   return (
-    <div className='min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8'>
-      <div className='max-w-md w-full space-y-8'>
-        <h2 className='mt-6 text-center text-3xl font-extrabold text-gray-900'>
-          Create your account
-        </h2>
-        {error && <p className='text-red-500 text-center'>{error}</p>}
+    <div className='min-h-screen flex items-center justify-center p-6'>
+      <div className='max-w-md w-full bg-white/15 backdrop-blur-lg shadow-xl rounded-lg p-8'>
+        <h2 className='text-center text-4xl font-extrabold text-lime-300 neon-text'>Sign Up</h2>
+        <p className='mt-6 text-center text-sm text-gray-300'>
+          Enter your credentials to continue the adventure.
+        </p>
+        {error && (
+          <p className='mt-4 text-center text-sm text-red-600 bg-red-900 bg-opacity-50 p-2 rounded'>
+            {error}
+          </p>
+        )}
         <SignupForm onSubmit={handleSignup} />
       </div>
     </div>
   );
+
+  ////signup
 };
 
 export default SignupPage;

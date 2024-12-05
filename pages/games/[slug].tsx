@@ -6,15 +6,12 @@ import ScoreBoard from '../../components/ScoreBoard';
 import { HangManGame } from '@/games/hangMan/HangManGame';
 import StickHeroGame from '@/games/stickHero/StickHeroGame';
 import SnakeGame from '@/games/snake/SnakeGame';
+import BreakoutGame from '@/games/breakout/BreakoutGame';
 
-// Dynamically import game components with SSR disabled
 const FlappyBirdGame = dynamic(() => import('../../games/flappyBird/FlappyBirdGame'), {
   ssr: false,
 });
-const Hangman = dynamic<{}>(
-  () => import('../../games/hangMan/HangManGame').then((mod) => mod.HangManGame),
-  { ssr: false }
-);
+
 
 const GamePage = () => {
   const router = useRouter();
@@ -47,6 +44,8 @@ const GamePage = () => {
         return <HangManGame />;
       case 'snake':
         return <SnakeGame />;
+      case 'breakout':
+        return <BreakoutGame />;
       default:
         return <div>Game not found</div>;
     }
@@ -54,12 +53,7 @@ const GamePage = () => {
 
   return (
     <div className='flex'>
-      <div className='flex-1 container mx-auto px-4 py-8'>
-        <h1 className='text-3xl font-bold mb-6'>
-          {isClient && slug ? `Playing ${slug}` : 'Loading...'}
-        </h1>
-        {renderGame()}
-      </div>
+      <div className='flex-1 container mx-auto px-4 py-8'>{renderGame()}</div>
       <ScoreBoard gameId={slug as string} />
     </div>
   );
