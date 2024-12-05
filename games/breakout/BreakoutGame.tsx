@@ -15,11 +15,6 @@ const BreakoutGame: React.FC = () => {
     lives: 1,
   });
 
-  // this is comment
-
-  //this is another commit
-
-  // this is commit by Lucky Verma
 
   useEffect(() => {
     if (status === 'unauthenticated') {
