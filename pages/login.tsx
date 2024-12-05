@@ -27,7 +27,7 @@ const LoginPage = () => {
     <div className='min-h-screen flex items-center justify-center p-6'>
       <div className='max-w-md w-full bg-white/15 backdrop-blur-lg shadow-xl rounded-lg p-8'>
         <h2 className='text-center text-4xl font-extrabold text-lime-300 neon-text'>Sign In</h2>
-        <p className='mt-2 text-center text-sm text-gray-300'>
+        <p className=' mt-6 text-center text-sm text-gray-300'>
           Enter your credentials to continue the adventure.
         </p>
         {error && (
@@ -39,7 +39,7 @@ const LoginPage = () => {
 
         <p className='mt-6 text-center text-sm text-gray-300'>
           New to the game?{' '}
-          <a href='/signup' className='text-purple-400 font-medium hover:underline'>
+          <a href='/signup' className='text-lime-500 font-medium hover:underline'>
             Create an account
           </a>
         </p>

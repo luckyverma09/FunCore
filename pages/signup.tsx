@@ -52,6 +52,12 @@ const SignupPage = () => {
           </p>
         )}
         <SignupForm onSubmit={handleSignup} />
+        <p className='mt-6 text-center text-sm text-gray-300'>
+          Already have an account.{' '}
+          <a href='/login' className='text-lime-500 font-medium hover:underline'>
+            Login
+          </a>
+        </p>
       </div>
     </div>
   );
