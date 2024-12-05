@@ -1,3 +1,5 @@
+//components/games/GameCard.tsx
+
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -10,26 +12,27 @@ interface GameCardProps {
   description: string;
 }
 
-const GameCard: React.FC<GameCardProps> = ({ id, title, slug, thumbnail, description }) => {
-  return (
-    (<Link href={`/games/${slug}`} className="block">
+const GameCard: React.FC<GameCardProps> = ({ title, slug, thumbnail, description }) => {
+  const imagePath = `/images/games/${thumbnail}`;
 
-      <div className="bg-white rounded-lg shadow-md overflow-hidden">
-        <Image
-          src={thumbnail}
-          alt={title}
-          width={300}
-          height={200}
-          layout="responsive"
-          className="object-cover"
-        />
-        <div className="p-4">
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">{title}</h3>
-          <p className="text-sm text-gray-600">{description}</p>
+  return (
+    <Link href={`/games/${slug}`} className='block'>
+      <div className='bg-white rounded-lg shadow-md overflow-hidden'>
+        <div className='relative w-full h-48'>
+          <Image
+            src={imagePath}
+            alt={title}
+            layout='fill'
+            objectFit='cover'
+            className='rounded-t-lg'
+          />
+        </div>
+        <div className='p-4'>
+          <h3 className='text-lg font-semibold text-gray-900 mb-2'>{title}</h3>
+          <p className='text-sm text-gray-600'>{description}</p>
         </div>
       </div>
-
-    </Link>)
+    </Link>
   );
 };
 
