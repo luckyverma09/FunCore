@@ -12,9 +12,8 @@ const BreakoutGame: React.FC = () => {
     isGameStarted: false,
     isGameOver: false,
     score: 0,
-    lives: 1,
+    lives: 2,
   });
-
 
   useEffect(() => {
     if (status === 'unauthenticated') {
@@ -74,7 +73,7 @@ const BreakoutGame: React.FC = () => {
             />
 
             {!gameState.isGameStarted && !gameState.isGameOver && (
-              <div className='absolute inset-0 flex items-center justify-center bg-black/50 rounded-lg'>
+              <div className=' inset-0 flex items-center justify-center bg-black/50 rounded-lg'>
                 <button onClick={() => gameRef.current?.startGame()} className=' font-bold text-xl'>
                   Start Game
                 </button>
@@ -82,7 +81,7 @@ const BreakoutGame: React.FC = () => {
             )}
 
             {gameState.isGameOver && (
-              <div className='absolute inset-0 flex items-center justify-center bg-black/50 rounded-lg'>
+              <div className=' inset-0 flex items-center justify-center bg-black/50 rounded-lg hover:bg-lime-300 border-black'>
                 <div className='text-center'>
                   <p className='text-2xl font-bold text-black mb-4'>Game Over!</p>
                   <button

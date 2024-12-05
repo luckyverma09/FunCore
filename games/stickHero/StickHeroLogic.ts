@@ -38,12 +38,12 @@ export class StickHeroLogic {
   public readonly heroHeight = 30;
   public readonly transitioningSpeed = 2;
   public readonly paddingX = 100;
-  public readonly hill1BaseHeight = 100;
+  public readonly hill1BaseHeight = 75;
   public readonly hill1Amplitude = 10;
   public readonly hill1Stretch = 1;
   public readonly hill2BaseHeight = 70;
-  public readonly hill2Amplitude = 20;
-  public readonly hill2Stretch = 0.5;
+  public readonly hill2Amplitude = 0.5;
+  public readonly hill2Stretch = 0.25;
   public readonly backgroundSpeedMultiplier = 0.2;
 
   public onScoreUpdate: (score: number) => void = () => {};
@@ -60,12 +60,19 @@ export class StickHeroLogic {
     this.score = 0;
     this.scoreSaved = false;
     this.platforms = [{ x: 50, w: 50 }];
-    this.generatePlatform(); // Generate initial next platform
+    this.generatePlatform();
+    this.generatePlatform();
+    this.generatePlatform();
+    this.generateTree();
+    this.generateTree();
+    this.generateTree();
+    this.generateTree();
+    this.generateTree();
     this.sticks = [{ x: this.platforms[0].x + this.platforms[0].w, length: 0, rotation: 0 }];
     this.trees = [];
     this.heroX = this.platforms[0].x + this.platforms[0].w - this.heroDistanceFromEdge;
     this.heroY = 0;
-    this.sceneOffset = 0; // Reset scene offset
+    this.sceneOffset = 0;
     this.phase = 'waiting';
     this.draw();
   }
@@ -91,7 +98,7 @@ export class StickHeroLogic {
   }
 
   private async saveScore() {
-    if (this.scoreSaved) return; // Early return if already saved
+    if (this.scoreSaved) return;
 
     try {
       const response = await fetch('/api/scores/stick-hero', {
@@ -104,7 +111,7 @@ export class StickHeroLogic {
       });
 
       if (response.ok) {
-        this.scoreSaved = true; // Mark as saved only on success
+        this.scoreSaved = true;
       }
     } catch (error) {
       console.error('Failed to save score:', error);
@@ -115,10 +122,17 @@ export class StickHeroLogic {
     this.ctx.save();
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-    // Draw background with parallax effect
     this.drawBackground();
+    this.generateTree();
+    this.generateTree();
+    this.generateTree();
+    this.generateTree();
+    this.generateTree();
+    this.generateTree();
+    this.generateTree();
+    this.generateTree();
+    this.generateTree();
 
-    // Center and translate the scene
     const scale = Math.min(
       this.canvas.width / this.canvasWidth,
       this.canvas.height / this.canvasHeight
@@ -251,8 +265,6 @@ export class StickHeroLogic {
     this.ctx.fillStyle = gradient;
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
-    // Draw hills and trees
-    this.drawHill(this.hill1BaseHeight, this.hill1Amplitude, this.hill1Stretch, '#95C629');
     this.drawHill(this.hill2BaseHeight, this.hill2Amplitude, this.hill2Stretch, '#659F1C');
     this.trees.forEach((tree) => this.drawTree(tree.x, tree.color));
   }
@@ -274,7 +286,8 @@ export class StickHeroLogic {
     const sineBaseY = this.canvas.height - baseHeight;
     return (
       Math.sin((this.sceneOffset * this.backgroundSpeedMultiplier + windowX) * stretch) *
-        amplitude +
+        amplitude *
+        2 + // Doubled amplitude for more pronounced hills
       sineBaseY
     );
   }
@@ -311,10 +324,10 @@ export class StickHeroLogic {
       this.getTreeY(x, this.hill1BaseHeight, this.hill1Amplitude)
     );
 
-    const treeTrunkHeight = 5;
-    const treeTrunkWidth = 2;
-    const treeCrownHeight = 25;
-    const treeCrownWidth = 10;
+    const treeTrunkHeight = 50; // Increased trunk height
+    const treeTrunkWidth = 20; // Increased trunk width
+    const treeCrownHeight = 150; // Increased crown height
+    const treeCrownWidth = 100; // Increased crown width
 
     // Draw trunk
     this.ctx.fillStyle = '#7D833C';
@@ -423,8 +436,8 @@ export class StickHeroLogic {
   }
 
   public generateTree(): void {
-    const minimumGap = 30;
-    const maximumGap = 150;
+    const minimumGap = 100;
+    const maximumGap = 250;
 
     const lastTree = this.trees[this.trees.length - 1];
     const furthestX = lastTree ? lastTree.x : 0;

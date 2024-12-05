@@ -26,7 +26,7 @@ export class BreakoutGameLogic {
   private brickOffsetTop: number = 30;
   private brickOffsetLeft: number = 30;
   private score: number = 0;
-  private lives: number = 1;
+  private lives: number = 2;
   private bricks: { x: number; y: number; status: number }[][] = [];
   private gameStarted: boolean = false;
   private gameOver: boolean = false;
@@ -195,7 +195,7 @@ export class BreakoutGameLogic {
     this.gameStarted = true;
     this.gameOver = false;
     this.score = 0;
-    this.lives = 3;
+    this.lives = 2;
     this.scoreSaved = false;
     this.initializeBricks();
     this.resetBallAndPaddle();
@@ -203,7 +203,7 @@ export class BreakoutGameLogic {
       isGameStarted: true,
       isGameOver: false,
       score: 0,
-      lives: 1,
+      lives: 2,
     });
   }
 

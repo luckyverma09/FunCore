@@ -38,7 +38,7 @@ const GamesPage = () => {
       <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6'>
         {games.map((game) => (
           <Link key={game.id} href={`/games/${game.id}`}>
-            <div className='block bg-white rounded-lg shadow-md overflow-hidden cursor-pointer transform transition duration-300 hover:scale-105 hover:shadow-xl'>
+            <div className='block bg-white rounded-lg shadow-md overflow-hidden cursor-pointer transform transition duration-500 hover:scale-105 hover:shadow-[0_4px_6px_0_rgba(0,255,0,0.5)]'>
               <div className='relative w-full h-40'>
                 <Image
                   src={game.thumbnail}
