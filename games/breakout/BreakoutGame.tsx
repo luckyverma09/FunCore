@@ -15,6 +15,8 @@ const BreakoutGame: React.FC = () => {
     lives: 1,
   });
 
+  // this is comment
+
   useEffect(() => {
     if (status === 'unauthenticated') {
       router.push('/login');
