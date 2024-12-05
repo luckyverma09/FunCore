@@ -17,6 +17,9 @@ const BreakoutGame: React.FC = () => {
 
   // this is comment
 
+
+  //this is another commit
+
   useEffect(() => {
     if (status === 'unauthenticated') {
       router.push('/login');
