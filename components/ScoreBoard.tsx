@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 interface Score {
   username: string;
   score: number;
-  createdAt: string;
 }
 
 const ScoreBoard = ({ gameId }: { gameId: string }) => {
@@ -16,7 +15,7 @@ const ScoreBoard = ({ gameId }: { gameId: string }) => {
         credentials: 'include',
       });
       if (response.ok) {
-        const data = await response.json();
+        const data: Score[] = await response.json();
         setScores(data);
       }
     } catch (error) {
@@ -28,13 +27,13 @@ const ScoreBoard = ({ gameId }: { gameId: string }) => {
 
   useEffect(() => {
     fetchScores();
-    const interval = setInterval(fetchScores, 5000);
-    return () => clearInterval(interval);
+    const interval = setInterval(fetchScores, 5000); // Refresh scores every 5 seconds
+    return () => clearInterval(interval); // Cleanup on unmount
   }, [gameId]);
 
   return (
-    <div className='w-64 h-1/2 bg-white/90 backdrop-blur-sm p-6 rounded-xl shadow-xl'>
-      <h2 className='text-2xl font-bold mb-6 text-gray-800 text-center'>High Scores</h2>
+    <div className='w-64 h-auto bg-white/90 backdrop-blur-sm p-6 rounded-xl shadow-xl'>
+      <h2 className='text-2xl font-bold mb-4 text-gray-800 text-center'>High Scores</h2>
       {loading ? (
         <div className='text-center text-gray-500'>Loading scores...</div>
       ) : (

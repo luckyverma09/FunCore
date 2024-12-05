@@ -7,7 +7,6 @@ type GameData = {
   title: string;
   description: string;
   category: string;
-  // Add other game properties as needed
 };
 
 type ErrorResponse = {

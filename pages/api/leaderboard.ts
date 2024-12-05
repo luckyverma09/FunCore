@@ -15,7 +15,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       .aggregate([
         {
           $group: {
-            _id: { $toObjectId: '$userId' }, // Convert userId to ObjectId for matching
+            _id: { $toObjectId: '$userId' },
             totalScore: { $sum: '$score' },
           },
         },
@@ -32,7 +32,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         },
         {
           $project: {
-            id: { $toString: '$_id' }, // Ensure _id is returned as a string
+            id: { $toString: '$_id' },
             username: '$userDetails.username',
             score: '$totalScore',
           },

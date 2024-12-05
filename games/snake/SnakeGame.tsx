@@ -99,7 +99,9 @@ const SnakeGame: React.FC = () => {
   return (
     <div className='snake-game'>
       <div className='scores text-clip'>
-        <h1>Score: {score.toString().padStart(3, '0')}</h1>
+        <h1>
+          Score: <span className='text-lime-600'>{score.toString().padStart(3, '0')}</span>
+        </h1>
       </div>
       <div className='game-border-1'>
         <div className='game-border-2'>

@@ -7,7 +7,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(to right, #4facfe 0, #00f2fe 100%);
   padding: 20px;
   transition: filter 0.3s;
 }

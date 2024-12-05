@@ -1,4 +1,4 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
+import { NextApiRequest, NextApiResponse } from 'next';
 import { connectToDatabase } from '../../../lib/mongodb';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -9,9 +9,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   if (req.method === 'POST') {
     try {
-      const { score } = req.body;
+      const { score, userId } = req.body;
       await db.collection('scores').insertOne({
-        userId: req.body.userId,
+        // userId,
         gameId,
         score,
         createdAt: new Date(),
@@ -29,16 +29,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         .collection('scores')
         .aggregate([
           {
-            $match: { gameId },
+            $match: { gameId }, // Filter scores by gameId
           },
           {
-            $sort: { score: -1 },
+            $sort: { score: -1 }, // Sort scores in descending order
           },
-
           {
-            $limit: 10,
+            $limit: 10, // Limit to top 10 scores
           },
-
           {
             $lookup: {
               from: 'users',
@@ -53,7 +51,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           {
             $project: {
               score: 1,
-              createdAt: 1,
               username: '$userDetails.username',
             },
           },
