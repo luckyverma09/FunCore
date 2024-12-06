@@ -10,12 +10,23 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (req.method === 'POST') {
     try {
       const { score, userId } = req.body;
+
+      // Debugging: Log request body
+      console.log('Request Body:', req.body);
+
+      // Validate input
+      if (!userId || !score) {
+        return res.status(400).json({ message: 'userId and score are required' });
+      }
+
+      // Insert score into the database
       await db.collection('scores').insertOne({
-        // userId,
+        userId, // Ensure userId is passed as a string
         gameId,
         score,
         createdAt: new Date(),
       });
+
       return res.status(200).json({ message: 'Score saved successfully' });
     } catch (error) {
       console.error('Error saving score:', error);
@@ -40,18 +51,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           {
             $lookup: {
               from: 'users',
-              localField: 'userId',
-              foreignField: '_id',
+              localField: 'userId', // userId in scores
+              foreignField: '_id', // _id in users
               as: 'userDetails',
             },
           },
           {
-            $unwind: '$userDetails',
+            $unwind: '$userDetails', // Flatten userDetails array
           },
           {
             $project: {
               score: 1,
-              username: '$userDetails.username',
+              username: '$userDetails.username', // Include username
             },
           },
         ])

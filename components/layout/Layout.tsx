@@ -19,7 +19,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     <>
       <div className={`${styles.gradientBackground} ${mounted ? 'client-rendered' : ''}`}>
         <Head>
-          <title>Gaming Platform</title>
+          <title>FunCore</title>
           <meta name='description' content='A next-generation gaming platform' />
           <link rel='icon' href='/favicon.ico' />
         </Head>
